@@ -1,0 +1,148 @@
+h1,h2,h3,h4,h5,h6 { color: #3E3E3F; }
+
+legend {
+	font-size: 1.5em;
+	color: #3E3E3F;
+}
+
+fieldset {
+	background-color:#F0F0F0;
+	border:1px solid #D8D8D8;
+}
+
+
+label {
+	font-weight: 100;
+}
+
+h1 {
+	margin-top: 14px;
+	padding: 5px;
+	border-bottom: 1px solid #ccc;
+	font-size: 2em;
+}
+
+/* Error messages and notices */
+#notice, #error {
+	width: 98%;
+  text-align: left;
+	margin-top: 11px;
+	margin-bottom: 11px;
+	padding: 7px 7px 8px 7px;
+	font: 12px "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+}
+
+#notice {
+	border-top: 1px solid #9ecb2e;
+	border-bottom: 1px solid #9ecb2e;
+	background-color: #daecb1;
+  color: #686868;
+}
+
+.flash_icon {
+	vertical-align: top;
+	padding-right: 3px;
+}
+
+#error {
+	color: #c00000;
+	border-top: 1px solid #ff7e7e;
+	border-bottom: 1px solid #ff7e7e;
+	background-color: #f1d6d6;
+}
+
+.errorExplanation {
+  color: red;
+  padding: 7px;
+}
+
+.errorExplanation h2 {
+	font-size: 1.5em;
+	color: red;
+}
+.fieldWithErrors input {
+	border: 1px solid red;
+	padding: 0px;
+	margin: 0px;
+}
+
+#undo {
+	border-top: 3px solid yellow;
+	border-bottom: 3px solid yellow;
+	background-color: lightyellow;
+	padding: 10px;
+	color: black;
+}
+
+.nolink {
+	color: #222222;
+	text-decoration: none;
+}
+
+.pagination {
+  text-align: center;
+  padding: 1em;
+}
+.pagination a, .apple_pagination span {
+  padding: .2em .3em;
+}
+.pagination span.disabled {
+  color: #AAA;
+}
+.pagination span.current {
+  font-weight: bold;
+  background: transparent url(apple-circle.gif) no-repeat 50% 50%;
+}
+.pagination a {
+  text-decoration: none;
+  color: black;
+}
+.pagination a:hover, .apple_pagination a:focus {
+  text-decoration: underline;
+}
+
+.required {
+	font-weight: bold;
+}
+
+
+form {
+	background-color:#F1F1F1;
+	border:1px solid #D8D8D8;
+	padding: 10px;
+}
+
+.form th, .form td {
+	vertical-align: top;
+	padding:4px 10px 4px 5px;
+}
+
+.form th {
+	text-align:right;
+	font-weight: normal;
+	background-color: transparent;
+	width: 100px;
+}
+
+.form p {
+	margin: 0px;
+	padding: 0px;
+}
+
+.form p.info {
+	margin-top: 5px;
+}
+
+#search form {
+	background-color: transparent;
+	border:0px;
+	padding: 10px;
+	padding-left: 0px;
+}
+
+.submit {
+	border-top: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+

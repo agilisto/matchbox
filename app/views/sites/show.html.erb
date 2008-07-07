@@ -1,0 +1,31 @@
+<% content_for(:title) do -%>
+	<h1><%=h @site.name %></h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+	<p>
+	  <b>Identifier:</b>
+	  <%=h @site.identifier %>
+	</p>
+
+	<p>
+	  <b>Homepage Url:</b>
+	  <%= link_to @site.homepage_url, @site.homepage_url, :popup => true if @site.homepage_url %>
+	</p>
+
+	<p>
+	  <b>Feed Url:</b>
+	  <%= link_to @site.feed_url, @site.feed_url, :popup => true %>
+	</p>
+<% end -%>
+
+<% content_for(:sidebar) do -%>
+	<div class="actions">
+		<%= link_to 'Edit', edit_site_path(@site) %> | <%= link_to 'Destroy', @site, :confirm => 'Are you sure?', :method => :delete %>
+		<br/><br/>
+		<%= link_to 'Back', sites_path %>
+	</div>
+<% end -%>
+
+
+<td></td>

@@ -1,0 +1,9 @@
+<% flash.each do |key, msg| %>
+  <%  if key.to_s == "notice"
+        src = '/images/tick.png'
+      elsif key.to_s == "error"
+        src = '/images/exclamation.png'
+      end
+  %>
+  <%= content_tag :div, content_tag(:img, msg, :src => src, :class => 'flash_icon'), :id => key %>
+<% end %>

@@ -1,0 +1,23 @@
+<% content_for(:title) do -%>
+	<h1>New product</h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+	<% form_for(@product) do |f| %>
+	  <%= f.error_messages %>
+		
+		<table class="form" cellspacing="0" cellpadding="0">
+			<tbody>
+				<%= render :partial => "form_fields", :locals => { :f => f } %>
+			</tbody>
+			<tr><th></th><td><%= f.submit "Create" %></td></tr>
+		</table>
+	<% end %>
+
+<% end -%>
+
+<% content_for(:sidebar) do -%>
+	<div class="actions">
+		<%= link_to 'Back', products_path %>
+	</div>
+<% end -%>

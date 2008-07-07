@@ -1,0 +1,8 @@
+<% content_for(:title) do -%>
+	<h1>Dashboard</h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+	<strong>Products: </strong><%= Product.count %><br/>
+	<strong>Sites: </strong><%= Site.count %>
+<% end -%>

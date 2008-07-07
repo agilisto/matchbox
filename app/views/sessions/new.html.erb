@@ -1,0 +1,22 @@
+<% content_for(:title) do -%>
+	<h1>Log In</h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+	<% form_tag session_path do -%>
+		<fieldset>
+			<p><label for="login">Login</label><br/>
+			<%= text_field_tag 'login', @login %></p>
+
+			<p><label for="password">Password</label><br/>
+			<%= password_field_tag 'password', nil %></p>
+
+			<!-- Uncomment this if you want this functionality
+			<p><label for="remember_me">Remember me:</label>
+			<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+			-->
+
+			<p><%= submit_tag 'Log in' %></p>
+		</fieldset>
+	<% end -%>
+<% end -%>

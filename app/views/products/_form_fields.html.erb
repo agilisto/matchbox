@@ -1,0 +1,23 @@
+<tr>
+	<th>
+		<%= f.label :name, "",  :class => "required" %>
+	</th>
+	<td>
+		<p>
+		  <%= f.text_field :name %>
+		</p>
+	</td>
+</tr>
+<tr>
+	<th>
+		<%= f.label :keywords %>
+	</th>
+	<td>
+		<p>
+		  <%= f.text_area :keywords, :rows => 6 %>
+			<p class="info">
+				Put each keyword, and each phrase onto a separate line.
+			</p>
+		</p>
+	</td>
+</tr>

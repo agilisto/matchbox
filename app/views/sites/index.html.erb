@@ -1,0 +1,46 @@
+<% content_for(:title) do -%>
+	<h1>Listing sites</h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+
+	<div id="search">
+		<% form_tag( sites_path, { :id => "search_form", :method => :get } ) do -%>
+
+		  <%= text_field_tag :n, params[:n], :size => 15, :maxlength => 50 %>
+		  <%= submit_tag "Search", :class => "search_button" %>
+
+			<% if !@filter.blank? -%>
+				<span class="small"><%= link_to "Unfilter", sites_path, :class => "quiet" %></span>
+			<% end -%>
+
+		<% end -%>
+	</div>
+
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Identifier</th>
+	    <th>Homepage</th>
+	    <th>Feed</th>
+	  </tr>
+
+	<% for site in @sites %>
+	  <tr>
+	    <td><%=h site.name %></td>
+	    <td><%=h site.identifier %></td>
+	    <td><%=h site.homepage_url %></td>
+	    <td><%=h site.feed_url %></td>
+	    <td><%= link_to 'Show', site %> | <%= link_to 'Edit', edit_site_path(site) %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<%= will_paginate @sites %>
+<% end -%>
+
+<% content_for(:sidebar) do -%>
+	<div class="actions">
+		<%= link_to 'New site', new_site_path %>
+	</div>
+<% end -%>

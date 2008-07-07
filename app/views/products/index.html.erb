@@ -1,0 +1,27 @@
+<% content_for(:title) do -%>
+	<h1>Listing products</h1>
+<% end -%>
+
+<% content_for(:main) do -%>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Keywords</th>
+  </tr>
+
+<% for product in @products %>
+  <tr>
+    <td><%=h product.name %></td>
+    <td><%=h product.keywords %></td>
+    <td><%= link_to 'Show', product %> | <%= link_to 'Edit', edit_product_path(product) %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end -%>
+
+<% content_for(:sidebar) do -%>
+	<div class="actions">
+		<%= link_to 'New product', new_product_path %>
+	</div>
+<% end -%>

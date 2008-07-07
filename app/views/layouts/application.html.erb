@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= APP_CONFIG['app_name'] %> | <%= controller.controller_name %><% if controller.action_name != "index" %> | <%= controller.action_name %><% end %></title>
+  <%= stylesheet_link_tag "blueprint-screen", "screen", :media => "screen", :cache => "all" %>
+
+  <!--[if IE]><link rel="stylesheet" href="/stylesheets/blueprint-ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+	<%= stylesheet_link_tag 'print', :media => "print" %>
+	
+  <%= javascript_include_tag "application", :cache => "all" %>
+
+</head>
+<body>
+
+<div class="container">
+	<div class="span-18">
+  	<%= image_tag "logo.gif", :title => "#{APP_CONFIG['app_name']}", :alt => "#{APP_CONFIG['app_name']}", :size => "235x54" %>
+		<%= render :partial => "layouts/navigation" if logged_in? %>
+  </div>
+	<div class="span-6 last">
+		<%= render :partial => "users/user_bar" %>
+	</div>
+	<div class="span-24">
+		<%= yield :title %>
+	</div>
+	<div class="span-18">
+		<%= render :partial => 'shared/flash_message' %>
+		<%= yield :main %>
+	</div>
+	<div class="span-6 last">
+		<%= yield :sidebar %>
+	</div>
+	<%= yield  %>
+	<div class="span-24">
+		<%= render :partial => "layouts/footer" %>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
