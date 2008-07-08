@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080707124329) do
+ActiveRecord::Schema.define(:version => 20080708105302) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(:version => 20080707124329) do
   end
 
   add_index "sites", ["identifier"], :name => "index_sites_on_identifier", :unique => true
+
+  create_table "stories", :force => true do |t|
+    t.integer  "site_id",    :limit => 11
+    t.string   "uri"
+    t.string   "title"
+    t.string   "content"
+    t.datetime "expired_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
