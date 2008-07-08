@@ -24,7 +24,7 @@ class Site < ActiveRecord::Base
                       :allow_nil => true,
                       :allow_blank => true
                       
-  has_many :stories
+  has_many :stories, :dependent => :destroy
   
 
   def fetch_stories

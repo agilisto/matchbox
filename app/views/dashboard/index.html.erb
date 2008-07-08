@@ -4,5 +4,7 @@
 
 <% content_for(:main) do -%>
 	<strong>Products: </strong><%= Product.count %><br/>
-	<strong>Sites: </strong><%= Site.count %>
+	<strong>Sites: </strong><%= Site.count %><br/>
+	<strong>Stories: </strong><%= Story.current.count %><br/>
+	
 <% end -%>
