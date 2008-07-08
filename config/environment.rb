@@ -70,6 +70,7 @@ end
 
 require 'yaml'
 require 'utils'
+require 'matchbox'
 
 if ENV['RAILS_ENV'] == "production"
   APP_CONFIG = YAML::load(File.open("#{RAILS_ROOT}/config/production_app_config.yml"))
