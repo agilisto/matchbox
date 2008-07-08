@@ -88,7 +88,11 @@ class SitesController < ApplicationController
   # POST /sites/1/fetch_stories
   # POST /sites/1/fetch_stories.xml
   def fetch_stories
-    @site.fetch_stories
+    if !@site.fetch_stories
+      flash[:error] = "Couldn't fetch the stories. Is it a proper feed?"
+    else
+      flash[:notice] = "Stories have been successfully updated."
+    end
     redirect_to @site # TODO: Not the neatest way - but the easiest
   end
 

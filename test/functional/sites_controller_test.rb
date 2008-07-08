@@ -76,4 +76,13 @@ class SitesControllerTest < ActionController::TestCase
     assert_redirected_to site_url(@site)
     assert !@site.stories.current.empty?
   end
+
+  def test_should_not_fetch_stories
+    @site.feed_url = "http://www.google.com"
+    assert @site.save
+    post :fetch_stories, :id => @site.id
+    assert_redirected_to site_url(@site)
+    assert @site.stories.current.empty?
+    assert_equal "Couldn't fetch the stories. Is it a proper feed?", flash[:error]
+  end
 end

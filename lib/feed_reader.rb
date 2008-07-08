@@ -4,8 +4,12 @@ require 'feed-normalizer'
 module FeedReader
   # Returns an array of stories (id, title, content etc), or nil if the url didn't work.
   def self.process(url)
-    stories = []
-    feed = FeedNormalizer::FeedNormalizer.parse open(url.strip)
-    feed.nil? ? nil : stories.push(*feed.entries)
+    begin
+      stories = []
+      feed = FeedNormalizer::FeedNormalizer.parse open(url.strip)
+      stories.push(*feed.entries)
+    rescue
+      return nil
+    end
   end
 end

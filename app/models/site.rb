@@ -34,11 +34,19 @@ class Site < ActiveRecord::Base
           stories.create!(:uri => story.id || story.urls.first,
                           :title => story.title,
                           :content => story.content)
+                          
         rescue ActiveRecord::RecordInvalid
           logger.warn($!) 
         end
       end
+      
+      # expire active stories that are no longer in this feed
+      stories.not_expired.each do |story|
+        story.expire! if !current_stories.find { |current| current.id == story.uri || current.urls.first == story.uri }
+      end
+      return true
+    else
+      return false
     end
-    return true
   end
 end
