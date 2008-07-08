@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :name
       t.text :keywords
-
+      t.string :ad_copy
       t.timestamps
     end
   end

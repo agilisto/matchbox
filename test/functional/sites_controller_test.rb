@@ -16,6 +16,16 @@ class SitesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:sites)
   end
 
+  def test_should_get_index_with_search
+    get :index, :n => "Si"
+    assert_response :success
+    assert_equal 1, assigns(:sites).size
+
+    get :index, :n => "xx"
+    assert_response :success
+    assert_equal 0, assigns(:sites).size
+  end
+
   def test_should_get_new
     get :new
     assert_response :success
@@ -30,6 +40,13 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   def test_should_show_site
+    get :show, :id => @site.id
+    assert_response :success
+  end
+
+  def test_should_show_site_with_stories
+    assert @site.stories.create!(:uri => "http://someuri.com", :title => "Headline")
+    @site.reload
     get :show, :id => @site.id
     assert_response :success
   end
@@ -50,5 +67,13 @@ class SitesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to sites_path
+  end
+  
+  def test_should_fetch_stories
+    @site.feed_url = "http://www.mg.co.za/rss"
+    assert @site.save
+    post :fetch_stories, :id => @site.id
+    assert_redirected_to site_url(@site)
+    assert !@site.stories.current.empty?
   end
 end

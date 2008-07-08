@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20080708105302) do
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "keywords"
+    t.string   "ad_copy"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

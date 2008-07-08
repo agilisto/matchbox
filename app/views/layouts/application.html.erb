@@ -29,12 +29,13 @@
 	</div>
 	<div class="span-18">
 		<%= render :partial => 'shared/flash_message' %>
-		<%= yield :main %>
+		<div id="main_content">
+			<%= yield :main %>
+		</div>
 	</div>
 	<div class="span-6 last">
 		<%= yield :sidebar %>
 	</div>
-	<%= yield  %>
 	<div class="span-24">
 		<%= render :partial => "layouts/footer" %>
   </div>

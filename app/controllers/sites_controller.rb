@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_filter :find_site, :except => [:index, :create, :new]
+
   # GET /sites
   # GET /sites.xml
   # Note: Room for more criteria, though we only have one for now: n=site name
@@ -19,8 +21,6 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.xml
   def show
-    @site = Site.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @site }
@@ -40,7 +40,6 @@ class SitesController < ApplicationController
 
   # GET /sites/1/edit
   def edit
-    @site = Site.find(params[:id])
   end
 
   # POST /sites
@@ -63,8 +62,6 @@ class SitesController < ApplicationController
   # PUT /sites/1
   # PUT /sites/1.xml
   def update
-    @site = Site.find(params[:id])
-
     respond_to do |format|
       if @site.update_attributes(params[:site])
         flash[:notice] = 'Site was successfully updated.'
@@ -80,7 +77,6 @@ class SitesController < ApplicationController
   # DELETE /sites/1
   # DELETE /sites/1.xml
   def destroy
-    @site = Site.find(params[:id])
     @site.destroy
 
     respond_to do |format|
@@ -88,4 +84,18 @@ class SitesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # POST /sites/1/fetch_stories
+  # POST /sites/1/fetch_stories.xml
+  def fetch_stories
+    @site.fetch_stories
+    redirect_to @site # TODO: Not the neatest way - but the easiest
+  end
+
+private 
+
+  def find_site
+    @site = Site.find(params[:id])
+  end
+  
 end

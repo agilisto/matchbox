@@ -3,10 +3,10 @@
 <% end -%>
 
 <% content_for(:main) do -%>
-	<p>
-	  <b>Keywords:</b>
-	  <%=h @product.keywords %>
-	</p>
+  <strong>Keywords:</strong><br/>
+	<%= simple_format(sanitize(@product.keywords)) %><br/>
+	<strong>Ad copy:</strong> <%=h @product.ad_copy %>
+  
 <% end -%>
 
 <% content_for(:sidebar) do -%>

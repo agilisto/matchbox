@@ -146,3 +146,22 @@ form {
 	padding-top: 10px;
 }
 
+.button-to {
+	background-color: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#refetch_stories {
+	float: right;
+	margin-right: 500px;
+}
+
+#main_content {
+	margin: 0px;
+	padding: 0px;
+}
+
+#main_content table {
+}

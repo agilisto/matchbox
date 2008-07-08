@@ -12,6 +12,17 @@ class Site < ActiveRecord::Base
   validates_format_of :identifier,
                       :with => /^[0-9a-z]+$/,
                       :message => 'only lowercase letters and digits are allowed'
+
+  validates_format_of :feed_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
+                      :message => "doesn't look right (don't forget the protocol eg http://)",
+                      :allow_nil => true,
+                      :allow_blank => true
+                      
+
+  validates_format_of :homepage_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
+  :message => "doesn't look right (don't forget the protocol eg http://)",
+                      :allow_nil => true,
+                      :allow_blank => true
                       
   has_many :stories
   
@@ -20,7 +31,7 @@ class Site < ActiveRecord::Base
     if current_stories = FeedReader.process(feed_url)
       current_stories.each do |story|
         begin
-          stories.create!(:uri => story.id,
+          stories.create!(:uri => story.id || story.urls.first,
                           :title => story.title,
                           :content => story.content)
         rescue ActiveRecord::RecordInvalid
@@ -28,5 +39,6 @@ class Site < ActiveRecord::Base
         end
       end
     end
+    return true
   end
 end

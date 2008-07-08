@@ -1,0 +1,18 @@
+<% if site.stories.current.size > 0 -%>
+	<table cellspacing="0" cellpadding="0" class="stories">
+		<tr>
+			<th>Headline</th>
+			<th>Fetched</th>
+			<th>Matched Product</th>
+		</tr>
+		<% site.stories.current.each do |story| -%>
+			<tr>
+				<td><%=h story.title  %></td>
+				<td><%= time_ago_in_words(story.created_at) %> ago</td>
+				<td>Not yet matched</td>
+			</tr>
+		<% end -%>
+	</table>
+<% else -%>
+	<p>No stories have been fetched yet. <%= button_to "Fetch now", fetch_stories_site_path(@site) %></p>
+<% end -%>

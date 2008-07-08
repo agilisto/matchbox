@@ -8,10 +8,10 @@ class SiteTest < ActiveSupport::TestCase
   
   def test_fetch_stories
     assert @site.fetch_stories
-    assert @site.stories.current.size == 14 # M&G publishes 14 stories
+    assert @site.stories.current.size == 10 # We've limited it to 10 (look at story.rb)
 
     assert @site.fetch_stories
-    assert @site.stories.current.size == 14
+    assert @site.stories.current.size == 10
   end
 
 end

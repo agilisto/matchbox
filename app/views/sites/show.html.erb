@@ -3,20 +3,13 @@
 <% end -%>
 
 <% content_for(:main) do -%>
-	<p>
-	  <b>Identifier:</b>
-	  <%=h @site.identifier %>
-	</p>
-
-	<p>
-	  <b>Homepage Url:</b>
-	  <%= link_to @site.homepage_url, @site.homepage_url, :popup => true if @site.homepage_url %>
-	</p>
-
-	<p>
-	  <b>Feed Url:</b>
-	  <%= link_to @site.feed_url, @site.feed_url, :popup => true %>
-	</p>
+  <strong>Identifier:</strong> <%=h @site.identifier %><br/>
+	<strong>Homepage Url:</strong> <%= link_to @site.homepage_url, @site.homepage_url, :popup => true if @site.homepage_url %><br/>
+  <strong>Feed Url:</strong> <%= link_to @site.feed_url, @site.feed_url, :popup => true %>
+	<hr/>
+	<%= button_to "Refetch", fetch_stories_site_path(@site), :id => "refetch_stories" if @site.stories.current.size > 0 %>
+	<h3>Current stories</h3>
+	<%= render :partial => "stories/list", :locals => { :site => @site } %>
 <% end -%>
 
 <% content_for(:sidebar) do -%>
