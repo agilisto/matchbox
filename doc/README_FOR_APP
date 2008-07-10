@@ -4,3 +4,10 @@ rake db:migrate
 rake ultrasphinx:configure
 rake ultrasphinx:index
 rake ultrasphinx:daemon:start
+
+Testing Gotchas
++++++++++++++++
+Some tests call rake ultrasphinx:index ... but currently,
+the ultrasphinx daemon is the same for both dev and testing.
+So once you return to developing, you'll need to reindex first,
+to avoid wonkiness.
