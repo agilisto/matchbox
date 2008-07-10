@@ -1,26 +1,27 @@
 ActionController::Routing::Routes.draw do |map|
+  map.matchbox "/matchbox", :controller => "matchbox", :action => "show", :format => "xml"
   map.resources :products
 
   map.resources :sites, :member => { :fetch_stories => :post }
 
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.logout "/logout", :controller => "sessions", :action => "destroy"
+  map.login "/login", :controller => "sessions", :action => "new"
+  map.register "/register", :controller => "users", :action => "create"
+  map.signup "/signup", :controller => "users", :action => "new"
   map.resources :users
 
   map.resource :session
 
   map.dashboard "/", :controller => "dashboard", :action => "index"
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  #   map.connect "products/:id", :controller => "catalog", :action => "view"
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
+  #   map.purchase "products/:id/purchase", :controller => "catalog", :action => "purchase"
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
@@ -50,6 +51,6 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  map.connect ":controller/:action/:id"
+  map.connect ":controller/:action/:id.:format"
 end

@@ -1,8 +1,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SiteTest < ActiveSupport::TestCase
+	self.use_transactional_fixtures = false
   
   def setup
+    # Cos we're not using transactional fixtures (else Sphinx doesn't see them in the DB)
+    Site.delete_all
+    Story.delete_all
+    Product.delete_all
+
     @site = Site.create!(:name => "Mail & Guardian", :feed_url => "http://www.mg.co.za/rss", :identifier => "mg")
   end
   
@@ -19,5 +25,21 @@ class SiteTest < ActiveSupport::TestCase
     @site.feed_url = "http://www.google.com"
     assert @site.save
     assert !@site.fetch_stories
+  end
+  
+  def test_ads
+    site2 = Site.create!(:name => "News24", :feed_url => "http://www.news24.com/rss", :identifier => "24")
+    story1 = Story.create!(:uri => "http://uri.com/1", :title => "Nadal arrives home to hero's welcome", :site => @site)
+    story2 = Story.create!(:uri => "http://uri.com/2", :title => "Leopards forced to change their spots", :site => @site)
+    story3 = Story.create!(:uri => "http://uri.com/3", :title => "Nothing relevant", :site => @site)
+    story4 = Story.create!(:uri => "http://uri.com/4", :title => "Nadal too - but different site", :site => site2)
+    product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
+    assert Matchbox.index_stories
+
+    @site.reload
+    assert ads = @site.ads
+    assert_equal 2, ads.size
+    assert_equal story1, ads[0].story
+    assert ads[0].score > 1
   end
 end
