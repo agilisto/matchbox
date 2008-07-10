@@ -1,9 +1,15 @@
 class Product < ActiveRecord::Base
   validates_presence_of :name
-  
+
+  validates_format_of :link, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
+  :message => "doesn't look right (don't forget the protocol eg http://)",
+                      :allow_nil => true,
+                      :allow_blank => true
+
   # Return a bunch relevant stories with their scores for this product, scoped on the site
   # Phrases - like Google - need to be in quotes for an EXACT match
-  # So we get a sorted array by weight ... [[story_id1, weight1], [story_id2, weight2]]
+  # So we get a sorted array by score ... [[story_id1, score1], [story_id2, score2]]
+  # This returns even those stories with 0 score. (not sure why Sphinx does this?)
   # Note: Very important to reindex before running this ... TODO: Put in some sort of check for this.
   def score_stories(site)
     scores = {}

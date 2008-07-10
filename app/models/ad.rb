@@ -7,7 +7,6 @@ class Ad
   
   attr_accessor :story, :product, :score
   
-  # TODO: Do we need to escape XML content first?
   def to_xml
     x = Builder::XmlMarkup.new
     x.ad {
@@ -15,8 +14,8 @@ class Ad
       x.product @product.nil? ? "" : @product.name
       x.score score
       x.ad_copy @product.nil? ? "" : @product.ad_copy
-      x.product_link @product.nil? ? "" : "URL to FNB"
-      x.product_link_text @product.nil? ? "" : "Link Text to FNB product URL"
+      x.product_link @product.nil? ? "" : @product.link
+      x.product_link_text @product.nil? ? "" : @product.link_text
     }
   end
 

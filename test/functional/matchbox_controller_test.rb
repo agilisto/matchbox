@@ -44,13 +44,15 @@ class MatchboxControllerTest < ActionController::TestCase
     story2 = Story.create!(:uri => "http://uri.com/2", :title => "Leopards forced to change their spots", :site => @site)
     story3 = Story.create!(:uri => "http://uri.com/3", :title => "Nothing relevant", :site => @site)
     story4 = Story.create!(:uri => "http://uri.com/4", :title => "Nadal too - but different site", :site => site2)
-    product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
+    product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives", :link => "http://www.fnb.co.za", :link_text => "FNBTXT")
     assert Matchbox.index_stories
 
     @request.host = "#{@site.identifier}.localhost"
     get :show
     assert_response :success
     assert_match /Nadal arrives home to hero welcome/, @response.body
+    assert_match /FNBTXT/, @response.body
+    assert_match /www.fnb.co.za/, @response.body
     assert_no_match /Nothing relevant/, @response.body
     assert_no_match /Nadal too - but different site/, @response.body
 
