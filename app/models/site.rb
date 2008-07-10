@@ -27,6 +27,8 @@ class Site < ActiveRecord::Base
   has_many :stories, :dependent => :destroy
   
 
+  # Fetches stories from the feed_url, and expires any older stories.
+  # We don't want to delete older stories - we might need it for historical reasons.
   def fetch_stories
     if current_stories = FeedReader.process(feed_url)
       current_stories.each do |story|
@@ -47,6 +49,17 @@ class Site < ActiveRecord::Base
       return true
     else
       return false
+    end
+  end
+  
+  # This creates the XML that matches products with headlines with relevancy values.
+  # With this you can make a "tag cloud"
+  # We loop through each products keywords and search for them in the stories, getting back relevancy scores.
+  def campaign
+    #relevancies = {}
+    # Doesn't do anything yet ....
+    Products.all.each do |product|
+      relevant_stories = product.score_stories
     end
   end
 end

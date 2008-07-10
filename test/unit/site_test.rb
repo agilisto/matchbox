@@ -8,10 +8,11 @@ class SiteTest < ActiveSupport::TestCase
   
   def test_fetch_stories
     assert @site.fetch_stories
-    assert @site.stories.current.size == 10 # We've limited it to 10 (look at story.rb)
+    size = @site.stories.current.size
+    assert size > 1
 
     assert @site.fetch_stories
-    assert @site.stories.current.size == 10
+    assert @site.stories.current.size == size
   end
 
   def test_fetch_rubbish

@@ -1,2 +1,6 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Install Sphinx (Sphinx-0.9.8-rc2 (r1234; Mar 29, 2008))
+rake db:create
+rake db:migrate
+rake ultrasphinx:configure
+rake ultrasphinx:index
+rake ultrasphinx:daemon:start

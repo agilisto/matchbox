@@ -34,7 +34,8 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   config.load_paths += %W(  #{RAILS_ROOT}/vendor/plugins/simple-rss-1.1/lib
                             #{RAILS_ROOT}/vendor/plugins/hoe-1.7.0/lib
-                            #{RAILS_ROOT}/vendor/plugins/feed-normalizer-1.5.1/lib )
+                            #{RAILS_ROOT}/vendor/plugins/feed-normalizer-1.5.1/lib
+                            #{RAILS_ROOT}/vendor/plugins/chronic-0.2.3/lib )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
