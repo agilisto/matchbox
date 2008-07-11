@@ -8,6 +8,12 @@ rake ultrasphinx:configure
 rake ultrasphinx:index
 rake ultrasphinx:daemon:start
 
+rake matchbox:refresh
++++++++++++++++++++++
+
+Needs to be cron'd or run manually.
+
+
 Testing Gotchas
 +++++++++++++++
 Some tests call rake ultrasphinx:index ... but currently,
