@@ -1,6 +1,8 @@
 Install Sphinx (Sphinx-0.9.8-rc2 (r1234; Mar 29, 2008))
 
 Create database.yml file based on database.yml.template
+Create production_app_config.yml based on production_app_config.yml.template,
+noting how many TLD's there are in the production URL. (so mydomain.com = 1)
 
 rake db:create
 rake db:migrate
