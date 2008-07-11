@@ -1,0 +1,18 @@
+<% if site.ads.size > 0 -%>
+	<table cellspacing="0" cellpadding="0" class="ads">
+		<tr>
+			<th>Headline</th>
+			<th>Product</th>
+			<th>Score</th>
+		</tr>
+		<% site.ads.each do |ad| -%>
+			<tr>
+				<td><%=h ad.story.title %></td>
+				<td><%=h ad.product.name %></td>
+				<td><%= ad.score %></td>
+			</tr>
+		<% end -%>
+	</table>
+<% else -%>
+	<p>No ads have been processed yet. Waiting for the refresh job to run. (It's scheduled)</p>
+<% end -%>

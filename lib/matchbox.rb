@@ -9,11 +9,16 @@ class Matchbox
   
   # Calls the Ultrasphinx rake task and returns the stdout
   def self.index_stories
+    ok = false
     output = []
     IO.popen("cd #{RAILS_ROOT} && rake ultrasphinx:index RAILS_ENV=#{ENV['RAILS_ENV']}") do |pipe|
       pipe.each("\r") do |line|
         output << line
+        ok = true if line =~ /Index rotated ok/
       end
+    end
+    if ok
+      Setting.last_indexed_at!
     end
     return output.join("\n")
   end

@@ -46,6 +46,7 @@ class Site < ActiveRecord::Base
       stories.not_expired.each do |story|
         story.expire! if !current_stories.find { |current| current.id == story.uri || current.urls.first == story.uri }
       end
+      last_fetched_at!
       return true
     else
       return false
@@ -66,5 +67,9 @@ class Site < ActiveRecord::Base
     end
     ads = ads_hash.to_a.map { |key_ad| key_ad[1] } # Now we have an array of Ads
     ads.delete_if { |ad| !ad.relevant? }.sort { |a, b| a.score <=> b.score }.reverse
+  end
+  
+  def last_fetched_at!
+    update_attribute :last_fetched_at, Time.now
   end
 end

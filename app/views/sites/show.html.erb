@@ -6,10 +6,22 @@
   <strong>Identifier:</strong> <%=h @site.identifier %><br/>
 	<strong>Homepage Url:</strong> <%= link_to @site.homepage_url, @site.homepage_url, :popup => true if @site.homepage_url %><br/>
   <strong>Feed Url:</strong> <%= link_to @site.feed_url, @site.feed_url, :popup => true %>
+	<% if Setting.last_refreshed_at -%>
+		<p><%= link_to "XML", matchbox_url(:subdomain => @site.identifier), :popup => true, :class => "highlight" %></p>
+	<% end -%>
 	<hr/>
 	<%= button_to "Refetch", fetch_stories_site_path(@site), :id => "refetch_stories" if @site.stories.current.size > 0 %>
 	<h3>Current stories</h3>
+	<% if @site.last_fetched_at -%>Last fetched: <%= time_ago_in_words(@site.last_fetched_at) %> ago<% end -%>
 	<%= render :partial => "stories/list", :locals => { :site => @site } %>
+
+	<hr/>
+	<h3>Current ads</h3>
+	<% if Setting.last_refreshed_at -%>Last refreshed: <%= time_ago_in_words(Setting.last_refreshed_at) %> ago<% end -%>
+	<%= render :partial => "ads/list", :locals => { :site => @site } %>
+	<% if Setting.last_refreshed_at -%>
+		<p><%= link_to "XML", matchbox_url(:subdomain => @site.identifier), :popup => true, :class => "highlight" %></p>
+	<% end -%>
 <% end -%>
 
 <% content_for(:sidebar) do -%>
