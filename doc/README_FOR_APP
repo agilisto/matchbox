@@ -1,4 +1,7 @@
 Install Sphinx (Sphinx-0.9.8-rc2 (r1234; Mar 29, 2008))
+
+Create database.yml file based on database.yml.template
+
 rake db:create
 rake db:migrate
 rake ultrasphinx:configure
@@ -11,3 +14,7 @@ Some tests call rake ultrasphinx:index ... but currently,
 the ultrasphinx daemon is the same for both dev and testing.
 So once you return to developing, you'll need to reindex first,
 to avoid wonkiness.
+
+HELP
+++++
+Call Joerg Diekmann @ 082 447 7057 or email joergd@pobox.com for any help or questions.
