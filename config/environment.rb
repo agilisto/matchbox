@@ -82,6 +82,7 @@ end
 # These are the sizes of the domain (i.e. 0 for localhost, 1 for something.com)
 # for each of your environments
 SubdomainFu.tld_sizes = { :development => 0,
+                          :development_cached => 0,
                           :test => 0,
                           :production => 1 }
 

@@ -17,9 +17,17 @@ class Matchbox
         ok = true if line =~ /Index rotated ok/
       end
     end
-    if ok
-      Setting.last_indexed_at!
-    end
+    let_the_world_know if ok
     return output.join("\n")
+  end
+
+private
+
+  def self.let_the_world_know
+    Setting.last_indexed_at!
+
+    cache_dir = ActionController::Base.page_cache_directory
+    FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
+    RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
   end
 end
