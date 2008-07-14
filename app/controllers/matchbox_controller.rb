@@ -4,8 +4,6 @@ class MatchboxController < ApplicationController
   before_filter :site_required
   session :off
   
-  # caches_page :show, :controller => "matchbox", :action => "show" # expires after a reindex
-  
   def show
     respond_to do |format|
       format.xml

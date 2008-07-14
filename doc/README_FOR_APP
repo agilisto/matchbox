@@ -18,6 +18,8 @@ Needs to be cron'd or run manually.
 
 Testing Gotchas
 +++++++++++++++
+rake ultrasphinx:configure RAILS_ENV=test
+
 Some tests call rake ultrasphinx:index ... but currently,
 the ultrasphinx daemon is the same for both dev and testing.
 So once you return to developing, you'll need to reindex first,

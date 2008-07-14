@@ -19,10 +19,6 @@ class Ad
     }
   end
 
-  def to_s
-    to_xml
-  end
-
   def relevant?
     @score > 0
   end

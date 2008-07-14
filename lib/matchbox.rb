@@ -26,8 +26,10 @@ private
   def self.let_the_world_know
     Setting.last_indexed_at!
 
-    cache_dir = ActionController::Base.page_cache_directory
-    FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
-    RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
+    if ActionController::Base.cache_configured?
+      cache_dir = ActionController::Base.cache_store.cache_path + "/views"
+      FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
+      RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
+    end
   end
 end
