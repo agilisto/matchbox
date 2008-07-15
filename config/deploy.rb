@@ -1,8 +1,8 @@
 require 'erb'
-require 'config/accelerator/accelerator_tasks'
+require 'config/opensolaris/accelerator_tasks'
 
-set :application, "Matchbox" #matches names used in smf_template.erb
-set :repository,  "svn://code.agilisto.com/matchbox/trunk"
+set :application, "matchbox" #matches names used in smf_template.erb
+
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -22,15 +22,23 @@ ssh_options[:paranoid] = false
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
-set :scm, :subversion
-set :domain, '993440e2.fb.joyent.us'
+set :scm, :git
+set :repository, "git@github-agilisto:agilisto/matchbox.git"
+set :branch, "stable"
+set :repository_cache, "git_cache"
+set :deploy_via, :remote_cache
 
+# This allows git to use your local private key and ssh agent
+# See http://blog.new-bamboo.co.uk/2008/3/12/github-with-capistrano
+set :ssh_options, { :forward_agent => true }
+
+set :domain, 'matchbox.ads.agilisto.tr.co.za'
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
-set :server_name, key_name + ".fb.joyent.us"
-set :server_alias, "*." + key_name + ".fb.joyent.us"
+set :server_name, "matchbox.ads.agilisto.tr.co.za"
+set :server_alias, "*." + "ads.agilisto.tr.co.za"
 
 # Example dependancies
 # depend :remote, :command, :gem
