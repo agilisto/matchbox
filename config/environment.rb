@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
 
   # Skip frameworks you're not going to use. To use Rails without a database
   # you must remove the Active Record framework.
-  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+  config.frameworks -= [ :active_resource, :action_mailer ]
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
@@ -67,6 +67,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  
 end
 
 require 'yaml'
@@ -81,9 +82,10 @@ end
 
 # These are the sizes of the domain (i.e. 0 for localhost, 1 for something.com)
 # for each of your environments
-SubdomainFu.tld_sizes = { :development => 0,
-                          :test => 0,
-                          :production => 1 }
+SubdomainFu.tld_sizes = { :development => APP_CONFIG['tld'],
+                          :development_cached => APP_CONFIG['tld'],
+                          :test => APP_CONFIG['tld'],
+                          :production => APP_CONFIG['tld'] }
 
 # These are the subdomains that will be equivalent to no subdomain
 SubdomainFu.mirrors = ["www"]

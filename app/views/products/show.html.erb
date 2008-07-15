@@ -4,8 +4,10 @@
 
 <% content_for(:main) do -%>
   <strong>Keywords:</strong><br/>
-	<%= simple_format(sanitize(@product.keywords)) %><br/>
-	<strong>Ad copy:</strong> <%=h @product.ad_copy %>
+	<%= simple_format(sanitize(@product.keywords)) %>
+	<strong>Ad copy:</strong> <%=h @product.ad_copy %><br/
+	<strong>Link:</strong> <%= link_to @product.link, @product.link if @product.link %><br/>
+	<strong>Link text:</strong> <%=h @product.link_text %>
   
 <% end -%>
 

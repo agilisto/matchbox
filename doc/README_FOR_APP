@@ -1,6 +1,30 @@
 Install Sphinx (Sphinx-0.9.8-rc2 (r1234; Mar 29, 2008))
+
+Create database.yml file based on database.yml.template
+Create production_app_config.yml based on production_app_config.yml.template,
+noting how many TLD's there are in the production URL. (so mydomain.com = 1)
+
 rake db:create
 rake db:migrate
 rake ultrasphinx:configure
 rake ultrasphinx:index
 rake ultrasphinx:daemon:start
+
+rake matchbox:refresh
++++++++++++++++++++++
+
+Needs to be cron'd or run manually.
+
+
+Testing Gotchas
++++++++++++++++
+rake ultrasphinx:configure RAILS_ENV=test
+
+Some tests call rake ultrasphinx:index ... but currently,
+the ultrasphinx daemon is the same for both dev and testing.
+So once you return to developing, you'll need to reindex first,
+to avoid wonkiness.
+
+HELP
+++++
+Call Joerg Diekmann @ 082 447 7057 or email joergd@pobox.com for any help or questions.

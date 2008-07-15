@@ -10,21 +10,24 @@ class ProductTest < ActiveSupport::TestCase
     Product.delete_all
   end
   
-  def test_score_stories_with_no_stories
+  def test_score_stories
     site = Site.create!(:name => "Mail & Guardian", :feed_url => "http://www.mg.co.za/rss", :identifier => "mg")
+    site2 = Site.create!(:name => "News24", :feed_url => "http://www.news24.com/rss", :identifier => "24")
     story1 = Story.create!(:uri => "http://uri.com/1", :title => "Nadal arrives home to hero's welcome", :site => site)
     story2 = Story.create!(:uri => "http://uri.com/2", :title => "Leopards forced to change their spots", :site => site)
+    story3 = Story.create!(:uri => "http://uri.com/3", :title => "Nothing relevant", :site => site)
+    story4 = Story.create!(:uri => "http://uri.com/4", :title => "Nadal too - but different site", :site => site2)
     product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
+
     assert_equal "arrives", product.keywords.split("\n").last
     assert Matchbox.index_stories
     scores = product.score_stories(site)
-    assert_equal 7642, scores[story1.id] # These score might change if we use different versions of Sphinx etc
-    assert_equal 2356, scores[story2.id] # These score might change if we use different versions of Sphinx etc
+    assert_equal [story1.id, 7809], scores.first  # These score might change if we use different versions of Sphinx etc
+    assert_equal [story3.id, 0], scores.last
 
     product.keywords = "Nadal arrives\nto"
     assert Matchbox.index_stories
     scores = product.score_stories(site)
-    assert_equal 6999, scores[story1.id] # Wanted this one to be higher than 7642 - perhaps need to weight phrase matches over keyword matches ...
-    assert_equal 2356, scores[story2.id] # These score might change if we use different versions of Sphinx etc
+    assert_equal [story1.id, 7183], scores.first  # These score might change if we use different versions of Sphinx etc
   end
 end

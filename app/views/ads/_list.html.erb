@@ -1,0 +1,18 @@
+<% if site.ads.size > 0 -%>
+	<table cellspacing="0" cellpadding="0" class="ads">
+		<tr>
+			<th>Headline</th>
+			<th>Product</th>
+			<th>Score</th>
+		</tr>
+		<% site.ads.each do |ad| -%>
+			<tr>
+				<td><%=h ad.story.title %></td>
+				<td><%=h ad.product.name %></td>
+				<td><%= ad.score %></td>
+			</tr>
+		<% end -%>
+	</table>
+<% else -%>
+	<p>There are no ads. Either there are no product matches, or the refresh job still has to run. (It's scheduled)</p>
+<% end -%>

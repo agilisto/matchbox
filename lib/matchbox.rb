@@ -9,12 +9,27 @@ class Matchbox
   
   # Calls the Ultrasphinx rake task and returns the stdout
   def self.index_stories
+    ok = false
     output = []
     IO.popen("cd #{RAILS_ROOT} && rake ultrasphinx:index RAILS_ENV=#{ENV['RAILS_ENV']}") do |pipe|
       pipe.each("\r") do |line|
         output << line
+        ok = true if line =~ /Index rotated ok/
       end
     end
+    let_the_world_know if ok
     return output.join("\n")
+  end
+
+private
+
+  def self.let_the_world_know
+    Setting.last_indexed_at!
+
+    if ActionController::Base.cache_configured?
+      cache_dir = ActionController::Base.cache_store.cache_path + "/views"
+      FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
+      RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
+    end
   end
 end

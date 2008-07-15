@@ -9,12 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080708105302) do
+ActiveRecord::Schema.define(:version => 20080711072646) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "keywords"
     t.string   "ad_copy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "link"
+    t.string   "link_text"
+  end
+
+  create_table "settings", :force => true do |t|
+    t.datetime "last_indexed_at"
+    t.datetime "last_refreshed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20080708105302) do
     t.string   "feed_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_fetched_at"
   end
 
   add_index "sites", ["identifier"], :name => "index_sites_on_identifier", :unique => true

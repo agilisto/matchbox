@@ -13,7 +13,7 @@ namespace :matchbox do
     task :index do
       puts "Indexing matchbox stories ..."
       load 'config/environment.rb'
-      puts Matchbox.index_stories
+      output = Matchbox.index_stories
     end
   
   end
@@ -21,5 +21,6 @@ namespace :matchbox do
   desc "Fetches and indexes the latest stories, and creates relevancy xml files"
   task :refresh => ["stories:fetch", "stories:index"] do
     puts "Matchbox has been refreshed."
+    Setting.last_refreshed_at!
   end
 end
