@@ -13,6 +13,18 @@ Capistrano::Configuration.instance(:must_exist).load do
 
         end
 
+        desc "Adds a SMF for the ultrasphinx"
+        task :create_ultrasphinx_smf, :roles => :app do
+
+            template = File.read("config/opensolaris/sphinx_smf_template.erb")
+            buffer = ERB.new(template).result(binding)
+
+            put buffer, "#{shared_path}/#{application}-sphinx-smf.xml"
+
+            sudo "svccfg import #{shared_path}/#{application}-sphinx-smf.xml"
+
+        end
+
         desc "Creates an Apache 2.2 compatible virtual host configuration file"
         task :create_vhost, :roles => :web do
             public_ip = ""
