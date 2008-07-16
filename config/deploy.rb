@@ -22,15 +22,16 @@ ssh_options[:paranoid] = false
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
-set :scm, :git
-set :repository, "git@github-agilisto:agilisto/matchbox.git"
-set :branch, "stable"
-set :repository_cache, "git_cache"
-set :deploy_via, :remote_cache
 
 # This allows git to use your local private key and ssh agent
 # See http://blog.new-bamboo.co.uk/2008/3/12/github-with-capistrano
 set :ssh_options, { :forward_agent => true }
+set :scm, :git
+set :repository, "git@github.com:agilisto/matchbox.git"
+set :repository_cache, "git_cache"
+set :deploy_via, :remote_cache
+
+
 
 set :domain, 'matchbox.ads.agilisto.tr.co.za'
 role :app, domain
