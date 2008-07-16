@@ -22,7 +22,7 @@
 indexer
 {
   # Indexer running options
-  mem_limit = 64M 
+  mem_limit = 32M 
 }
 
 searchd
