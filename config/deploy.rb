@@ -27,7 +27,7 @@ set :scm, :git
 set :repository, "git@github.com:agilisto/matchbox.git"
 set :repository_cache, "git_cache"
 set :deploy_via, :remote_cache
-set :git_enable_submodules, 1
+#set :git_enable_submodules, 1
 set :domain, 'matchbox.ads.agilisto.tr.co.za'
 
 role :app, domain
