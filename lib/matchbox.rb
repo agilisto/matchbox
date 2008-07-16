@@ -21,15 +21,18 @@ class Matchbox
     return output.join("\n")
   end
 
-private
-
-  def self.let_the_world_know
-    Setting.last_indexed_at!
-
+  def self.expire_cache
     if ActionController::Base.cache_configured?
       cache_dir = ActionController::Base.cache_store.cache_path + "/views"
       FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
       RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
     end
+  end
+  
+private
+
+  def self.let_the_world_know
+    Setting.last_indexed_at!
+    expire_cache
   end
 end
