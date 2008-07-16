@@ -85,10 +85,15 @@ task :link_to_shared_database_yml do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
 end
 
+task :link_to_shared_production_app_config_yml do
+  run "ln -nfs #{shared_path}/config/production_app_config.yml #{release_path}/config/production_app_config.yml"
+end
+
 task :configure_ultrasphinx do
   run "rake -f #{release_path}/Rakefile ultrasphinx:configure RAILS_ENV=production"
 end
 
 after "deploy:update", 'chmod_tmp_folder'
 after "deploy:update", 'link_to_shared_database_yml'
+after "deploy:update", 'link_to_shared_production_app_config_yml'
 after "deploy:update", 'configure_ultrasphinx'
