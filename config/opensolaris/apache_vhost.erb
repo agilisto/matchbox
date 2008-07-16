@@ -1,0 +1,32 @@
+<VirtualHost <%= "*" %>:80>
+ServerName <%= server_name %> 
+ServerAlias <%= server_alias %>                                                                                                                                                                     
+DocumentRoot <%= public_path %>                                                                                                                                                                            
+<Directory "<%= public_path %>/">                                                                                                                                                                               
+Options FollowSymLinks                                                                                                                                                                                                  
+AllowOverride None                                                                                                                                                                                                      
+Order allow,deny                                                                                                                                                                                                        
+Allow from all                                                                                                                                                                                                
+</Directory>
+RewriteEngine On
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+RewriteRule ^/(.*)$ balancer://<%= application %>-mongrels%{REQUEST_URI} [P,QSA,L]       
+<Proxy balancer://<%= application %>-mongrels><% start_port.upto(end_port) do |port| %>
+  BalancerMember http://127.0.0.1:<%= port %><% end %>
+</Proxy>                 
+
+# Deflate
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \\bMSIE !no-gzip !gzip-only-text/html
+
+                                                      
+ProxyPass /images !                                                                                                                                                                                                     
+ProxyPass /stylesheets !
+ProxyPass /javascripts !  
+ProxyPass /FusionCharts !                                                                                                                                                                                              
+ProxyPass / balancer://<%= application %>-mongrels                                                                                                                                                                          
+ProxyPassReverse / balancer://<%= application %>-mongrels                                                                                                                                                                      
+ProxyPreserveHost On  
+</VirtualHost>
