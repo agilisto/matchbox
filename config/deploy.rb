@@ -30,7 +30,7 @@ set :deploy_via, :remote_cache
 #set :git_enable_submodules, 1
 set :domain, 'matchbox.ads.agilisto.tr.co.za'
 
-role :app, domain
+role :app, domain, :cron => true 
 role :web, domain
 role :db,  domain, :primary => true
 
@@ -97,3 +97,40 @@ after "deploy:update", 'chmod_tmp_folder'
 after "deploy:update", 'link_to_shared_database_yml'
 after "deploy:update", 'link_to_shared_production_app_config_yml'
 after "deploy:update", 'configure_ultrasphinx'
+
+namespace :cron do 
+  task :start, :roles => :app, :only => {:cron => true} do 
+    cron_tab = "#{shared_path}/cron.tab" 
+    run "mkdir -p #{shared_path}/log/cron" 
+    require 'erb' 
+    template = File.read("config/cron.erb") 
+    file = ERB.new(template).result(binding) 
+    put file, cron_tab, :mode => 0644 
+    # merge with the current crontab 
+    # fails with an empty crontab, which is acceptable 
+    run "crontab -l >> #{cron_tab}" rescue nil 
+    # install the new crontab 
+    run "crontab #{cron_tab}" 
+  end 
+
+  task :stop, :roles => :app, :only => {:cron => true} do 
+    cron_tmp = "#{shared_path}/cron.old" 
+    cron_tab = "#{shared_path}/cron.tab" 
+    begin 
+      # dump the current cron entries 
+      run "crontab -l > #{cron_tmp}" 
+      # remove any lines that contain the application name 
+      run "awk '{if ($0 !~ /#{application}/) print $0}' " + 
+      "#{cron_tmp} > #{cron_tab}" 
+      # replace the cron entries 
+      run "crontab #{cron_tab}" 
+    rescue 
+      # fails with an empty crontab, which is acceptable 
+    end 
+    # clean up 
+    run "rm -rf #{cron_tmp}" 
+  end 
+end 
+
+before "deploy:stop", "cron:stop" 
+after "deploy:start", "cron:start"
