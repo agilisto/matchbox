@@ -1,18 +1,29 @@
+<<<<<<< HEAD:config/opensolaris/apache_vhost.erb
 <VirtualHost <%= "*" %>:80>
 ServerName <%= server_name %> 
 ServerAlias <%= server_alias %>                                                                                                                                                                     
+=======
+<VirtualHost <%= public_ip %>:80>
+ServerName <%= server_name %>                                                                                                                                                                      
+>>>>>>> 499dace4984d76107e2afdc559c7e5cbd5289826:config/opensolaris/apache_vhost.erb
 DocumentRoot <%= public_path %>                                                                                                                                                                            
 <Directory "<%= public_path %>/">                                                                                                                                                                               
 Options FollowSymLinks                                                                                                                                                                                                  
 AllowOverride None                                                                                                                                                                                                      
 Order allow,deny                                                                                                                                                                                                        
+<<<<<<< HEAD:config/opensolaris/apache_vhost.erb
 Allow from all                                                                                                                                                                                                
 </Directory>
+=======
+Allow from all                                                                                                                                                                                                        
+</Directory>    
+>>>>>>> 499dace4984d76107e2afdc559c7e5cbd5289826:config/opensolaris/apache_vhost.erb
 RewriteEngine On
 RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
 RewriteRule ^/(.*)$ balancer://<%= application %>-mongrels%{REQUEST_URI} [P,QSA,L]       
 <Proxy balancer://<%= application %>-mongrels><% start_port.upto(end_port) do |port| %>
   BalancerMember http://127.0.0.1:<%= port %><% end %>
+<<<<<<< HEAD:config/opensolaris/apache_vhost.erb
 </Proxy>                 
 
 # Deflate
@@ -22,10 +33,17 @@ BrowserMatch ^Mozilla/4\.0[678] no-gzip
 BrowserMatch \\bMSIE !no-gzip !gzip-only-text/html
 
                                                       
+=======
+</Proxy>                                                                       
+>>>>>>> 499dace4984d76107e2afdc559c7e5cbd5289826:config/opensolaris/apache_vhost.erb
 ProxyPass /images !                                                                                                                                                                                                     
+<<<<<<< HEAD:config/opensolaris/apache_vhost.erb
 ProxyPass /stylesheets !
 ProxyPass /javascripts !  
 ProxyPass /FusionCharts !                                                                                                                                                                                              
+=======
+ProxyPass /stylesheets !                                                                                                                                                                                                
+>>>>>>> 499dace4984d76107e2afdc559c7e5cbd5289826:config/opensolaris/apache_vhost.erb
 ProxyPass / balancer://<%= application %>-mongrels                                                                                                                                                                          
 ProxyPassReverse / balancer://<%= application %>-mongrels                                                                                                                                                                      
 ProxyPreserveHost On  

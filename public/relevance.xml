@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<matchbox>
+  <ads>
+    <ad>
+      <story>New crime wave</story>
+      <product>Prebook</product>
+      <score>5477</score>
+      <text>Guests not honouring accommodation reservations? Let us help you prevent a loss of income.</text>
+      <product-link>http://fnb.co.za</product-link>
+      <product-link-text>CLICK HERE to apply for PREBOOK today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Hijacking stats creep up</story>
+      <product>Prebook</product>
+      <score>2390</score>
+      <text>Negative headlines affecting your tourism business? Reduce the risk of empty beds.</text>
+      <product-link>http://fnb.co.za</product-link>
+      <product-link-text>CLICK HERE to apply for PREBOOK today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Bafana coach announces new team</story>
+      <product>Prebook</product>
+      <score>9755</score>
+      <text>The world is coming to watch the 2010 FIFA World Cup(tm). Make sure they stay with you.</text>
+      <product-link>http://fnb.co.za</product-link>
+      <product-link-text>CLICK HERE to apply for PREBOOK today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Inflation rockets</story>
+      <product>Start Up</product>
+      <score>7421</score>
+	  <text>A rsiky time to start a new business.? Find out why we thing it is a good time.</text>
+      <product-link>http://fnb.co.za</product-link>
+      <product-link-text>CLICK HERE to apply for START UP today.</product-link-text>
+	</ad>
+	<ad>
+      <story>Mines will Retrench</story>
+      <product>Start Up</product>
+      <score>1870</score>
+      <text>South Africa needs more entrepreneurs. Become one today</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to find out how we can help you start a new business.</product-link-text>
+    </ad>
+	<ad>
+      <story>Interest rate hike unavoidable</story>
+      <product>Debtor Finance</product>
+      <score>12556</score>
+      <text>Imagine what an immediate cash flow injection could do for your business right now.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for Debtor Finance today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Best foods declare dividend</story>
+      <product>Franchising</product>
+      <score>6700</score>
+      <text>Also thinking about franchising your business idea?</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE for our holistic franchising solutions.</product-link-text>
+    </ad>
+	<ad>
+      <story>Bank charges will drop</story>
+      <product>Accounting</product>
+      <score>2890</score>
+      <text>Avoid unnecessary bank charges. Monitor your accounts daily to prevent penalty charges.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>Click here to apply for Qwill Instant Accounting today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Oil production drops</story>
+      <product>Accounting</product>
+      <score>8355</score>
+      <text>Will higher fuel costs affect the financial performance of your business? Find out instantly</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>Click here to apply for Qwill Instant Accounting today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Crash landing blocks Heathrows runways</story>
+      <product>Dual Authorisation</product>
+      <score>2112</score>
+      <text>Unforeseen circumstances delayed your business trip? How will you authorize business payments?</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>Click here to apply for Dual Authorisation via cellphone today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Gold Price Recovers</story>
+      <product>Debtor Finance</product>
+      <score>10933</score>
+      <text>Weak rand affecting your business cash flow? Get a cash injection now.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for Debtor Finance today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Boks to meet All Blacks on home turf</story>
+      <product>Cellphone Banking</product>
+      <score>3466</score>
+      <text>Want to watch the game but worried about your business?</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for Cellphone Banking for Business.</product-link-text>
+    </ad>
+	<ad>
+      <story>Sars develops new software system</story>
+      <product>Accounting</product>
+      <score>12443</score>
+      <text>Need an instant VAT Report? Generate it instantly from your FNB online bank statements.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for Qwill Instant Accounting today.</product-link-text>
+    </ad>
+	<ad>
+      <story>PPI at record highs</story>
+      <product>Ebucks</product>
+      <score>3661</score>
+      <text>In tough times any extra income is a plus.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for eBucks for business today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Airline cancels new routes</story>
+      <product>Ebucks</product>
+      <score>5762</score>
+      <text>High oil prices affecting your business travel? Earn eBucks and fly for free.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for eBucks for business today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Google stock on the rise</story>
+      <product>Ebucks</product>
+      <score>5762</score>
+      <text>Want to read more on new business strategies? Earn eBucks and choose books for free.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to apply for eBucks for business today.</product-link-text>
+    </ad>
+	<ad>
+      <story>Retail sales plummet</story>
+      <product>Biznetwork</product>
+      <score>11211</score>
+      <text>Need new business ideas in a depressed economy? Network, network, network.</text>
+	  <product-link>http://fnb.co.za</product-link>
+	  <product-link-text>CLICK HERE to join biznetwork today.</product-link-text>
+    </ad>
+  </ads>
+</matchbox>
