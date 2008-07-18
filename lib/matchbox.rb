@@ -21,18 +21,27 @@ class Matchbox
     return output.join("\n")
   end
 
-  def self.expire_cache
-    if ActionController::Base.cache_configured?
-      cache_dir = ActionController::Base.cache_store.cache_path + "/views"
-      FileUtils.rm_r(Dir.glob(cache_dir + "/matchbox/*")) rescue Errno::ENOENT
-      RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
+  def self.generate_ads
+    Site.find(:all).each do |site|
+      File.open(cache_directory + "/#{site.identifier}.xml", "w") { |f| f.write(site.ads_xml_document) }
     end
+    return Site.count
+  end
+
+  def self.expire_cache
+    FileUtils.rm_r(Dir.glob(cache_directory + "/*")) rescue Errno::ENOENT
+    RAILS_DEFAULT_LOGGER.info("Expired all matchboxes.")
   end
   
+  def self.cache_directory
+    cache_dir = ActionController::Base.page_cache_directory + "/matchbox"
+  end
+
 private
 
   def self.let_the_world_know
     Setting.last_indexed_at!
-    expire_cache
+    #expire_cache
   end
+  
 end

@@ -69,6 +69,20 @@ class Site < ActiveRecord::Base
     ads.delete_if { |ad| !ad.relevant? }.sort { |a, b| a.score <=> b.score }.reverse
   end
   
+  # This generates the xml representing all the ads
+  def ads_xml_document
+    x = Builder::XmlMarkup.new
+    x.instruct! :xml, :version=>"1.0"
+    x.matchbox {
+      x.last_refreshed Setting.last_refreshed_at
+      x.ads {
+        ads.each do |ad|
+          x << ad.to_xml
+        end
+      }
+    }
+  end
+  
   def last_fetched_at!
     update_attribute :last_fetched_at, Time.now
   end

@@ -1,12 +1,9 @@
 class MatchboxController < ApplicationController
-  skip_before_filter :admin_site_required
   skip_before_filter :login_required
-  before_filter :site_required
   session :off
   
-  def show
-    respond_to do |format|
-      format.xml
-    end
+  # Just to prevent routing errors if the xml file doesn't exist.
+  def default
+    render :text => "", :status => 404
   end
 end
