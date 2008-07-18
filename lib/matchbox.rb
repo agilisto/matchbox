@@ -9,9 +9,10 @@ class Matchbox
   
   # Calls the Ultrasphinx rake task and returns the stdout
   def self.index_stories
+    path = ENV['RAILS_ENV'] == "production" ? "/opt/local/bin/" : "" 
     ok = false
     output = []
-    IO.popen("cd #{RAILS_ROOT} && rake ultrasphinx:index RAILS_ENV=#{ENV['RAILS_ENV']}") do |pipe|
+    IO.popen("cd #{RAILS_ROOT} && #{path}rake ultrasphinx:index RAILS_ENV=#{ENV['RAILS_ENV']}") do |pipe|
       pipe.each("\r") do |line|
         output << line
         ok = true if line =~ /Index rotated ok/
