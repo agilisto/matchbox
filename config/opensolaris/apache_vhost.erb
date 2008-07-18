@@ -15,6 +15,7 @@ RewriteRule ^/(.*)$ balancer://<%= application %>-mongrels%{REQUEST_URI} [P,QSA,
 </Proxy>                                                                       
 ProxyPass /images !                                                                                                                                                                                                     
 ProxyPass /stylesheets !                                                                                                                                                                                                
+ProxyPass /matchbox !                                                                                                                                                                                                     
 ProxyPass / balancer://<%= application %>-mongrels                                                                                                                                                                          
 ProxyPassReverse / balancer://<%= application %>-mongrels                                                                                                                                                                      
 ProxyPreserveHost On  
