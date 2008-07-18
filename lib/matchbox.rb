@@ -13,7 +13,7 @@ class Matchbox
     index_path = Ultrasphinx::INDEX_SETTINGS['path']
     mkdir_p index_path unless File.directory? index_path
     
-    path = ENV["RAILS_ENV"] == production ? "/opt/local/bin/" : ""
+    path = ENV["RAILS_ENV"] == "production" ? "/opt/local/bin/" : ""
     cmd = "#{path}indexer --config '#{Ultrasphinx::CONF_PATH}'"
     cmd << " #{ENV['OPTS']} " if ENV['OPTS']
     cmd << " --rotate" if rotate
