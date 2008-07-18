@@ -22,6 +22,7 @@ class Matchbox
   end
 
   def self.generate_ads
+    FileUtils.makedirs(cache_directory)
     Site.find(:all).each do |site|
       File.open(cache_directory + "/#{site.identifier}.xml", "w") { |f| f.write(site.ads_xml_document) }
     end
