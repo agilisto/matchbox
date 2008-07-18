@@ -15,7 +15,7 @@ class Matchbox
     
     cmd = "indexer --config '#{Ultrasphinx::CONF_PATH}'"
     cmd << " #{ENV['OPTS']} " if ENV['OPTS']
-    cmd << " --rotate" if rotate
+    cmd << " --rotate" if true # rotate
     cmd << " #{Ultrasphinx::UNIFIED_INDEX_NAME}"
     
     say cmd
