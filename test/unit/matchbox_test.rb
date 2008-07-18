@@ -12,8 +12,7 @@ class MatchboxTest < ActiveSupport::TestCase
   end
 
   def test_index_stories
-    assert output = Matchbox.index_stories
-    assert_match /Index rotated ok/, output
+    assert Matchbox.index
   end
 
   def test_generate_xml
@@ -27,7 +26,7 @@ class MatchboxTest < ActiveSupport::TestCase
     assert Matchbox.expire_cache
     assert !File.exist?("#{Matchbox.cache_directory}/#{site2.identifier}.xml")
 
-    assert Matchbox.index_stories
+    assert Matchbox.index
     assert Matchbox.generate_ads
 
     assert document = File.open("#{Matchbox.cache_directory}/#{site2.identifier}.xml")

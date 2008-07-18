@@ -13,7 +13,11 @@ namespace :matchbox do
     task :index do
       puts "Indexing matchbox stories ..."
       load 'config/environment.rb'
-      output = Matchbox.index_stories
+      if Matchbox.index
+        puts "Index rotated ok"
+      else
+        puts "warning; index failed to rotate! Deleting new indexes"
+      end
     end
   
     desc "Creates XML ads for all stories"

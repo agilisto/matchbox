@@ -34,7 +34,7 @@ class SiteTest < ActiveSupport::TestCase
     story3 = Story.create!(:uri => "http://uri.com/3", :title => "Nothing relevant", :site => @site)
     story4 = Story.create!(:uri => "http://uri.com/4", :title => "Nadal too - but different site", :site => site2)
     product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
-    assert Matchbox.index_stories
+    assert Matchbox.index
 
     @site.reload
     assert ads = @site.ads
@@ -46,7 +46,7 @@ class SiteTest < ActiveSupport::TestCase
   def test_ads_xml_document
     story = Story.create!(:uri => "http://uri.com/1", :title => "Nadal arrives home to hero's welcome", :site => @site)
     product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
-    assert Matchbox.index_stories
+    assert Matchbox.index
 
     @site.reload
     assert_equal "<?xml version=\"1.0\" encoding=\"UTF-8\"?><matchbox><last_refreshed></last_refreshed><ads><ad><story>Nadal arrives home to hero's welcome</story><product>Product</product><score>7500</score><ad_copy></ad_copy><product_link></product_link><product_link_text></product_link_text></ad></ads></matchbox>", @site.ads_xml_document
