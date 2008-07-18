@@ -14,9 +14,9 @@ namespace :matchbox do
       puts "Indexing matchbox stories ..."
       load 'config/environment.rb'
       if Matchbox.index
-        puts "Index rotated ok"
+        puts "Done"
       else
-        puts "warning; index failed to rotate! Deleting new indexes"
+        puts "Failed"
       end
     end
   
