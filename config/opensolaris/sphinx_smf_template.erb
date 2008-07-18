@@ -4,7 +4,7 @@
   <service name='application/matchbox-ultrasphinx' type='service' version='0'>
     <create_default_instance enabled='true'/>
     <single_instance/>
-    <exec_method name='start' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:start RAILS_ENV=production" timeout_seconds='60'>
+    <exec_method name='start' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:start" timeout_seconds='60'>
       <method_context working_directory='<%= working_directory %>'>
 			<method_credential user="root" group="root"/>
         <method_environment>
@@ -13,7 +13,7 @@
         </method_environment>
       </method_context>
     </exec_method>
-    <exec_method name='stop' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:stop RAILS_ENV=production" timeout_seconds='60'>
+    <exec_method name='stop' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:stop" timeout_seconds='60'>
       <method_context working_directory='<%= working_directory %>'>
 			<method_credential user="root" group="root"/>
         <method_environment>
@@ -22,7 +22,7 @@
         </method_environment>
       </method_context>
     </exec_method>
-    <exec_method name='restart' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:restart RAILS_ENV=production" timeout_seconds='60'>
+    <exec_method name='restart' type='method' exec="/opt/local/bin/rake ultrasphinx:daemon:restart" timeout_seconds='60'>
       <method_context working_directory='<%= working_directory %>'>
 			<method_credential user="root" group="root"/>
         <method_environment>

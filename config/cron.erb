@@ -1,3 +1,4 @@
+0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57 * * * * RAILS_ENV=production rake -f <%= current_path %>/Rakefile chores:three_minutes >> <%= deploy_to %>/shared/log/cron/three_minutes.txt
 0,15,30,45 * * * * RAILS_ENV=production rake -f <%= current_path %>/Rakefile chores:quarterly >> <%= deploy_to %>/shared/log/cron/quaterly.txt
 00 * * * * RAILS_ENV=production rake -f <%= current_path %>/Rakefile chores:hourly >> <%= deploy_to %>/shared/log/cron/hourly.txt
 01 0 * * * RAILS_ENV=production rake -f <%= current_path %>/Rakefile chores:daily >> <%= deploy_to %>/shared/log/cron/daily.txt
