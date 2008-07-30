@@ -62,7 +62,7 @@ class Site < ActiveRecord::Base
     Product.all.each do |product|
       product.score_stories(self).each do |story_score|
         story_id, score = *story_score
-        ads_hash[story_id] = Ad.new(stories.find(story_id), product, score) if ads_hash[story_id].nil? || ads_hash[story_id].score < score
+        ads_hash[story_id] = Ad.new(stories.current.find(story_id), product, score) if ads_hash[story_id].nil? || ads_hash[story_id].score < score
       end
     end
     ads = ads_hash.to_a.map { |key_ad| key_ad[1] } # Now we have an array of Ads

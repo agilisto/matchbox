@@ -93,3 +93,5 @@ SubdomainFu.mirrors = ["www"]
 # This is the "preferred mirror" if you would rather show this subdomain
 # in the URL than no subdomain at all.
 SubdomainFu.preferred_mirror = "www"
+
+ExceptionNotifier.exception_recipients = %w(joergd@pobox.com)

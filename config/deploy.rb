@@ -1,8 +1,8 @@
 require 'erb'
+require 'mongrel_cluster/recipes'
 require 'config/opensolaris/accelerator_tasks'
 
 set :application, "matchbox" #matches names used in smf_template.erb
-
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -20,9 +20,6 @@ set :service_name, application
 set :working_directory, "#{deploy_to}/current"
 ssh_options[:paranoid] = false 
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-
 # This allows git to use your local private key and ssh agent
 # See http://blog.new-bamboo.co.uk/2008/3/12/github-with-capistrano
 set :ssh_options, { :forward_agent => true }
@@ -30,16 +27,15 @@ set :scm, :git
 set :repository, "git@github.com:agilisto/matchbox.git"
 set :repository_cache, "git_cache"
 set :deploy_via, :remote_cache
-
-
-
+#set :git_enable_submodules, 1
 set :domain, 'matchbox.ads.agilisto.tr.co.za'
-role :app, domain
+
+role :app, domain, :cron => true 
 role :web, domain
 role :db,  domain, :primary => true
 
 set :server_name, "matchbox.ads.agilisto.tr.co.za"
-set :server_alias, "*." + "ads.agilisto.tr.co.za"
+set :server_alias, "*.ads.agilisto.tr.co.za"
 
 # Example dependancies
 # depend :remote, :command, :gem
@@ -49,47 +45,6 @@ set :server_alias, "*." + "ads.agilisto.tr.co.za"
 # depend :remote, :gem, :rake, '>=0.7'
 # depend :remote, :gem, :BlueCloth, '>=1.0.0'
 # depend :remote, :gem, :RubyInline, '>=3.6.3'
-
-desc "update vendor rails"
-
-task :update_rails do
-    # get the version of edge rails that the user is currently using
-    #for entry in Dir.entries("./vendor/rails")
-    #    puts entry.to_s
-    #    if entry[/\REVISION_\d+/]
-    #        local_revision  = entry.sub("REVISION_","")
-    #    end
-    #end
-    
-    local_revision = "8434"
-
-    # update to that revision
-    puts local_revision
-
-    # get rid of the current rails dir
-    if File.exist?("#{deploy_to}/shared/rails")
-
-        # check current version
-        for entry in Dir.entries("#{deploy_to}/shared/rails")
-            if entry[/\REVISION_\d+/]
-                deployed_revision  = entry.sub("REVISION_","")
-            end
-        end
-        sudo "rm -rf #{deploy_to}/shared/rails"
-    end
-
-    # check out edge rails
-    sudo "svn co http://dev.rubyonrails.org/svn/rails/trunk #{deploy_to}/shared/rails --revision=" + local_revision
-end
-
-desc "create symlinks from rails dir into project"
-task :create_sym do
-    sudo "ln -nfs #{shared_path}/rails #{release_path}/vendor/rails"
-    #sudo "ln -nfs #{deploy_to}/shared//uploaded_images #{release_path}/public//uploaded_images"
-    #sudo "chown -R mongrel:www  #{deploy_to} "
-    #sudo "chown -R mongrel:www  #{shared_path} "	
-    #sudo "chmod 775  #{deploy_to} "
-end
 
 desc "tasks to run after checkout"
 task :after_update_code do
@@ -121,3 +76,61 @@ task :tail_log, :roles => :app do
 end
 
 after :deploy, 'deploy:cleanup'
+
+task :chmod_tmp_folder do
+  run "chmod -R 777 #{deploy_to}/current/tmp"
+end
+
+task :link_to_shared_database_yml do
+  run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+end
+
+task :link_to_shared_production_app_config_yml do
+  run "ln -nfs #{shared_path}/config/production_app_config.yml #{release_path}/config/production_app_config.yml"
+end
+
+task :configure_ultrasphinx do
+  run "rake -f #{release_path}/Rakefile ultrasphinx:configure RAILS_ENV=production"
+end
+
+after "deploy:update", 'chmod_tmp_folder'
+after "deploy:update", 'link_to_shared_database_yml'
+after "deploy:update", 'link_to_shared_production_app_config_yml'
+after "deploy:update", 'configure_ultrasphinx'
+
+namespace :cron do 
+  task :start, :roles => :app, :only => {:cron => true} do 
+    cron_tab = "#{shared_path}/cron.tab" 
+    run "mkdir -p #{shared_path}/log/cron" 
+    require 'erb' 
+    template = File.read("config/cron.erb") 
+    file = ERB.new(template).result(binding) 
+    put file, cron_tab, :mode => 0644 
+    # merge with the current crontab 
+    # fails with an empty crontab, which is acceptable 
+    run "crontab -l >> #{cron_tab}" rescue nil 
+    # install the new crontab 
+    run "crontab #{cron_tab}" 
+  end 
+
+  task :stop, :roles => :app, :only => {:cron => true} do 
+    cron_tmp = "#{shared_path}/cron.old" 
+    cron_tab = "#{shared_path}/cron.tab" 
+    begin 
+      # dump the current cron entries 
+      run "crontab -l > #{cron_tmp}" 
+      # remove any lines that contain the application name 
+      run "awk '{if ($0 !~ /#{application}/) print $0}' " + 
+      "#{cron_tmp} > #{cron_tab}" 
+      # replace the cron entries 
+      run "crontab #{cron_tab}" 
+    rescue 
+      # fails with an empty crontab, which is acceptable 
+    end 
+    # clean up 
+    run "rm -rf #{cron_tmp}" 
+  end 
+end 
+
+before "deploy:stop", "cron:stop" 
+after "deploy:start", "cron:start"

@@ -141,7 +141,7 @@ def ultrasphinx_daemon_pid
 end
 
 def ultrasphinx_daemon_running?
-  if ultrasphinx_daemon_pid and `ps #{ultrasphinx_daemon_pid} | wc`.to_i > 1 
+  if ultrasphinx_daemon_pid and `ps -p #{ultrasphinx_daemon_pid} | wc`.to_i > 1 
     true
   else
     # remove bogus lockfiles

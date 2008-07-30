@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
                       :allow_nil => true,
                       :allow_blank => true
 
+  after_save { Matchbox::expire_cache }
+  
   # Return a bunch relevant stories with their scores for this product, scoped on the site
   # Phrases - like Google - need to be in quotes for an EXACT match
   # So we get a sorted array by score ... [[story_id1, score1], [story_id2, score2]]
@@ -24,7 +26,7 @@ class Product < ActiveRecord::Base
                                           :weights => {"title" => 2.0},
                                           :query => query).run
       search.response[:matches].each do |match|
-        scores[match[:doc]] += match[:weight]
+        scores[match[:doc]] += match[:weight] rescue true
       end
     end
     return scores.sort { |a, b| a[1] <=> b[1] }.reverse
