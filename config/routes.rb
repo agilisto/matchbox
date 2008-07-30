@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.matchbox "/matchbox", :controller => "matchbox", :action => "show", :format => "xml"
+  map.matchbox "/matchbox/:identifier.xml", :controller => "matchbox", :action => "default"
   map.resources :products
 
   map.resources :sites, :member => { :fetch_stories => :post }

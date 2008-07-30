@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= APP_CONFIG['app_name'] %> | <%= controller.controller_name %><% if controller.action_name != "index" %> | <%= controller.action_name %><% end %></title>
+  <title>matchbox | <%= controller.controller_name %><% if controller.action_name != "index" %> | <%= controller.action_name %><% end %></title>
   <%= stylesheet_link_tag "blueprint-screen", "screen", :media => "screen", :cache => "all" %>
 
   <!--[if IE]><link rel="stylesheet" href="/stylesheets/blueprint-ie.css" type="text/css" media="screen, projection"><![endif]-->
@@ -18,7 +18,7 @@
 
 <div class="container">
 	<div class="span-18">
-  	<%= image_tag "logo.gif", :title => "#{APP_CONFIG['app_name']}", :alt => "#{APP_CONFIG['app_name']}", :size => "235x54" %>
+  	<%= image_tag "logo.gif", :title => "matchbox", :alt => "matchbox", :size => "235x54" %>
 		<%= render :partial => "layouts/navigation" if logged_in? %>
   </div>
 	<div class="span-6 last">

@@ -6,3 +6,4 @@ config/production_app_config.yml
 config/ultrasphinx/*.conf
 public/javascripts/all.js
 public/stylesheets/all.css
+public/matchbox*

@@ -20,13 +20,13 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.create!(:name => "Product", :keywords => "Nadal\nto\narrives")
 
     assert_equal "arrives", product.keywords.split("\n").last
-    assert Matchbox.index_stories
+    assert Matchbox.index
     scores = product.score_stories(site)
     assert_equal [story1.id, 7809], scores.first  # These score might change if we use different versions of Sphinx etc
     assert_equal [story3.id, 0], scores.last
 
     product.keywords = "Nadal arrives\nto"
-    assert Matchbox.index_stories
+    assert Matchbox.index
     scores = product.score_stories(site)
     assert_equal [story1.id, 7183], scores.first  # These score might change if we use different versions of Sphinx etc
   end

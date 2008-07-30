@@ -1,4 +1,4 @@
-port: "9600"
+port: 9600
 environment: production
 address: 127.0.0.1
 pid_file: /home/993440e2/web/matchbox/shared/pids/mongrel.pid

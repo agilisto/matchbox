@@ -37,7 +37,7 @@ Capistrano::Configuration.instance(:must_exist).load do
             start_port = cluster_info['port'].to_i
             puts "START PORT #{start_port}"
             end_port = start_port + cluster_info['servers'].to_i - 1
-            put "END PORT #{end_port}"
+            puts "END PORT #{end_port}"
             public_path = "#{current_path}/public"
 
             template = File.read("config/opensolaris/apache_vhost.erb")

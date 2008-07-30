@@ -1,5 +1,12 @@
 namespace :chores do
   
+  # Every three minutes
+  task :three_minutes do
+    chore("Three_minutes") do
+      Rake::Task['ultrasphinx:daemon:start'].invoke
+    end
+  end
+
   # 4 times / hour.
   task :quarterly => :environment do
     chore("Quaterly") do

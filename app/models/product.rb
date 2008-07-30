@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
                       :allow_nil => true,
                       :allow_blank => true
 
-  after_save { Matchbox::expire_cache }
+  after_save { Matchbox::generate_ads }
   
   # Return a bunch relevant stories with their scores for this product, scoped on the site
   # Phrases - like Google - need to be in quotes for an EXACT match
