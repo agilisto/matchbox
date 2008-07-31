@@ -49,6 +49,6 @@ class SiteTest < ActiveSupport::TestCase
     assert Matchbox.index
 
     @site.reload
-    assert_equal "<?xml version=\"1.0\" encoding=\"UTF-8\"?><matchbox><last_refreshed></last_refreshed><ads><ad><story>Nadal arrives home to hero's welcome</story><product>Product</product><score>7500</score><ad_copy></ad_copy><product_link></product_link><product_link_text></product_link_text></ad></ads></matchbox>", @site.ads_xml_document
+    assert_equal "<?xml version=\"1.0\" encoding=\"UTF-8\"?><matchbox><last_refreshed></last_refreshed><ads><ad><story>Nadal arrives home to hero's welcome</story><story_link>http://uri.com/1</story_link><product>Product</product><score>7500</score><ad_copy></ad_copy><product_link></product_link><product_link_text></product_link_text></ad></ads></matchbox>", @site.ads_xml_document
   end
 end
