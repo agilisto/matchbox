@@ -7,7 +7,7 @@ namespace :chores do
       Ultrasphinx.with_rake = true
       FileUtils.mkdir_p File.dirname(Ultrasphinx::DAEMON_SETTINGS["log"]) rescue nil
       raise Ultrasphinx::DaemonError, "Already running" if ultrasphinx_daemon_running?
-      system "searchd --config '#{Ultrasphinx::CONF_PATH}'"
+      system "/opt/local/bin/searchd --config '#{Ultrasphinx::CONF_PATH}'"
       sleep(4) # give daemon a chance to write the pid file
       if ultrasphinx_daemon_running?
         say "started successfully"
